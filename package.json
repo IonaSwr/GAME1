@@ -1,0 +1,25 @@
+{
+  "name": "game1",
+  "version": "1.0.0",
+  "description": "jumping and runing super mario alike",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "vhost": "^3.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start":"node server/start.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IonaSwr/GAME1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IonaSwr/GAME1/issues"
+  },
+  "homepage": "https://github.com/IonaSwr/GAME1#readme"
+}

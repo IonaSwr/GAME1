@@ -1,0 +1,7 @@
+.rabit{
+    border:10px solid red;
+    width:40px;
+    height:40px;
+    border-radius: 40px;
+    position: fixed;
+}
