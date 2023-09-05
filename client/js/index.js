@@ -1,63 +1,25 @@
 window.onload = ()=>{
-    rabit = document.getElementsByClassName('rabit')[0];
-    rabit.style.top = 400;
-    setInterval(() => {
-        
-        JumpY += JumpAccelerationY;
-        if(JumpY > 0)
-            JumpAccelerationY--;
-        else
-        JumpY = 0
-        rabit.style.top = rabitY - JumpY;
-
-        VilocityX += AccelerationX;
-        rabit.style.left = rabitX + VilocityX;
-
-
-    }, 50);
-    window.onkeydown = aKeyWasDown;
+    fetch('/home/getstate')
+    .then(res=>res.json())
+    .then(res=>{
+        serverState = res;
+        localStorage["serverState"] = res;
+    });
+    mainStyleButton.onclick = mainStyleButtonClick;
 }
 
+function mainStyleButtonClick()
+{
+    if(serverState.windowStyle == 1)
+        serverState.windowStyle = 2;
+    else        
+        serverState.windowStyle = 1;
+    mainStyle.href = serverState.windowStyles[serverState.windowStyle];
 
-    var rabit ;
-    var rabitX = 400;
-    var rabitY = 400;
-    var JumpY = 0;
-    var JumpAccelerationY = 0;
-    var AccelerationX = 0;
-    var AccelerationY = 0;
-    var VilocityX = 0;
-    var VilocityY = 0; 
-
-function aKeyWasDown(event) {
-    let key = event.key;    
-    let text
-    switch(key)
-    {
-        case "ArrowUp":
-            {
-                                  
-            }break;
-        case "ArrowDown":
-            {
-                           
-            }break;
-        case "ArrowLeft":
-            {
-                if(AccelerationX > -5)
-                    AccelerationX -=4;                  
-            }break;
-        case "ArrowRight":
-            {
-                if(AccelerationX < 5)
-                AccelerationX +=4;
-            }break;
-        case " ":
-            {
-                if(JumpY == 0)
-                    JumpAccelerationY = 7;                
-            }break;
-    }
-    
-
-  }
+    fetch('/home/changemainstyle?change=true')
+    .then(res=>res.json())
+    .then(res=>{
+        serverState = res;
+        localStorage["serverState"] = res;  
+    });
+}

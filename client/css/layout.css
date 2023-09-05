@@ -1,0 +1,8 @@
+
+body > .content {
+    margin: auto;
+    max-width: 1000px;
+    padding:4px;
+}
+
+.darkBright{float:right}
