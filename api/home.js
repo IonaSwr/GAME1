@@ -1,33 +1,16 @@
 const router = require('express').Router();
 var fs = require('fs');
+var {serverState,renderLayout} = require('./layout');
+var controllerName = 'home';
+
 
 router.get('/', main);
 router.get('/changemainstyle', changemainstyle);
 router.get('/getstate', getState);
 
-var serverState = { inc : 0 ,
-    mainStyle : "/css/bright.css",
-    windowStyle : 1,
-    windowStyles : {1:'/css/dark.css',2:'/css/bright.css'}
-};
-
 function main(req, res)  {
-    fs.readFile('api/layout.htm', 'utf8', (err, data) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).send('Internal Server Error');
-      }
-      var modifiedHtml = data.replace('{{mainStyle}}',serverState.windowStyles[serverState.windowStyle]);
-      fs.readFile('api/home.htm', 'utf8', (err, data) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send('Internal Server Error');
-        }
-        var innerHtml = modifiedHtml.replace('{{body}}',data);
-        res.send(innerHtml);
-      });
-    });
-  };
+    renderLayout(controllerName,req, res);
+}
 
 function changemainstyle(req,res){
     if(req.query.change=='true')
@@ -45,5 +28,5 @@ function getState(req,res){
 }
 
 console.log('index controller loaded ')
-router.main = main;
+
 module.exports = router;
